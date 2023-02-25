@@ -1,0 +1,121 @@
+/* 
+Given in an alumni interview in 2021.
+String Encode
+You are given a string that may contain sequences of consecutive characters.
+Create a function to shorten a string by including the character,
+then the number of times it appears. 
+
+
+If final result is not shorter (such as "bb" => "b2" ),
+return the original string.
+*/
+
+const str1 = "aaaabbcdddaaa";
+const expected1 = "a4b2c1d3a3";
+
+const str2 = "";
+const expected2 = "";
+
+const str3 = "a";
+const expected3 = "a";
+
+const str4 = "bbcc";
+const expected4 = "bbcc";
+
+/**
+ * Encodes the given string such that duplicate characters appear once followed
+ * by a number representing how many times the char occurs. Only encode strings
+ * when the result yields a shorter length.
+ * - Time: O(?).
+ * - Space: O(?).
+ * @param {string} str The string to encode.
+ * @returns {string} The given string encoded.
+ *
+ *
+ */
+function encodeStr(str) {
+  // edge case
+  if (str.length < 2) {
+    return str;
+  }
+  if (str.length < 1) {
+    return "";
+  }
+
+  // create a new output variable called encoded
+  let encoded = "",
+    temp = "",
+    count = 0;
+  // iterate through the string
+  for (let i = 0; i < str.length; i++) {
+    // use pointers to keep track of occurrances
+    let current = str[i],
+      pointer = str[i + 1];
+    temp = current;
+    // if current is equal to pointer, move pointer to the next element
+    if (current === pointer) {
+      count++;
+    } else {
+      // push the first occurrance and append the length
+      encoded += temp + (count + 1);
+      count = 0;
+    }
+  }
+  if (encoded.length === str.length) {
+    return str;
+  }
+  // return encoded
+  return encoded;
+}
+
+// console.log(encodeStr(str1));
+// console.log(encodeStr(str2));
+// console.log(encodeStr(str3));
+// console.log(encodeStr(str4));
+/*****************************************************************************/
+
+/* 
+  String Decode  
+*/
+
+const two_str1 = "a3b2c1d3";
+const two_expected1 = "aaabbcddd";
+
+const two_str2 = "a3b2c12d10";
+const two_expected2 = "aaabbccccccccccccdddddddddd";
+
+/**
+ * Decodes the given string by duplicating each character by the following int
+ * amount if there is an int after the character.
+ * - Time: O(?).
+ * - Space: O(?).
+ * @param {string} str An encoded string with characters that may have an int
+ *    after indicating how many times the character occurs.
+ * @returns {string} The given str decoded / expanded.
+ *
+ *
+ */
+function decodeStr(str) {
+  let decodedStr = "";
+  // iterate over the string
+  for (let i = 0; i < str.length; i++) {
+    // keep track of current and pointer
+    // current will point to the alphabet
+    // pointer will point to the number.
+    let current = str[i],
+      increment = 1,
+      pointer = str[i + increment];
+
+    if (current.match(/[a-z]/g)) {
+      console.log(current, pointer);
+      if (pointer.match(/[0-9]/g)) {
+      }
+    }
+    // check to make sure current
+    // and then we will concat alphabet x times into a new string variable
+  }
+  return decodedStr;
+}
+
+console.log(decodeStr(two_str1));
+console.log(decodeStr(two_str2));
